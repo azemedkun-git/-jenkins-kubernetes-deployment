@@ -1,12 +1,10 @@
 pipeline {
-
+  agent any	
   environment {
     dockerimagename = "azemedkun/react-app"
-    dockerImage = ""
   }
 
-  agent any
-
+ 
   stages {
 
     stage('Checkout Source') {
