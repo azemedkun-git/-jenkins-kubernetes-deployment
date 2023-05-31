@@ -11,8 +11,13 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/azemedkun-git/-jenkins-kubernetes-deployment.git'
-      }
+			git (
+				url: 'https://github.com/azemedkun-git/-jenkins-kubernetes-deployment.git',
+				branch: 'main',
+				changelog: true,
+				poll: true
+			)
+		}
     }
 
     stage('Build image') {
