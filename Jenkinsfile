@@ -2,6 +2,7 @@ pipeline {
   agent any	
   environment {
     dockerimagename = "azemedkun/react-app"
+    dockerImage = ""
   }
 
  
@@ -21,7 +22,7 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          dockerImage = docker.build dockerimagename + ":$BUILD_NUMBER"
+          dockerImage = docker.build -t dockerimagename
         }
       }
     }
@@ -33,7 +34,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("latest")
+          dockerImage.push("latest")
           }
         }
       }
