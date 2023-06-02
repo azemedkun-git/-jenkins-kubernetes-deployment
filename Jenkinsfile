@@ -8,7 +8,12 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        git 'https://github.com/azemedkun-git/-jenkins-kubernetes-deployment.git'
+        git (
+				url: 'https://github.com/azemedkun-git/-jenkins-kubernetes-deployment.git',
+				branch: 'main',
+				changelog: true,
+				poll: true
+			)
       }
     }
     stage('Building image') {
