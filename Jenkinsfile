@@ -1,7 +1,8 @@
 pipeline {
   	
   environment {
-    dockerimagename = "azemedkun/react-app"
+    registry = "azemedkun/react-app"
+	registryCredential = 'dockerhub-credentials'
     dockerImage = ""
   }
 
@@ -23,15 +24,12 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          docker.build dockerimagename + ":$BUILD_NUMBER"
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
 
     stage('Pushing Image') {
-      environment {
-               registryCredential = 'dockerhub-credentials'
-           }
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
